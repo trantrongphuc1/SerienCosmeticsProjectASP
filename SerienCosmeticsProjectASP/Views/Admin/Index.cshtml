@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <h2>Chào bạn đến với trang Admin</h2>
+    <h3>KPI mỗi tháng</h3>
+    <div>
+        <p>Tổng số người dùng mới: 40</p>
+        <p>Tổng số đơn hàng mới: 100</p>
+        <p>Tổng doanh thu: Tăng 30.000.000</p>
+        <p>Tổng số sản phẩm bán ra: Không giới hạn</p>
+    </div>
+
+    <h4>Thống kê trong tháng @DateTime.Now.Month</h4>
+    <div>
+        <p>Tổng số người dùng mới: @Model.TotalUsers</p>
+        <p>Tổng số đơn hàng: @Model.TotalOrders</p>
+        <p>Tổng doanh thu: @String.Format(format, "{0:c0}", Model.TotalRevenue)</p>
+        <p>Tổng số sản phẩm bán ra: @Model.TotalProducts</p>
+    </div>
+
+    <button onclick="toggleChart('adminChartContainer')">Biểu đồ thống kê</button>
+    <button onclick="toggleChart('comparisonChartContainer')">Biểu đồ so sánh</button> 
+
+    <div class="chart-container" id="adminChartContainer">
+        <canvas id="adminChart" width="400" height="200"></canvas>
+    </div>
+    <div class="chart-container" id="comparisonChartContainer">
+        <canvas id="comparisonChart" width="400" height="200"></canvas>
+    </div>
+
+    <script>
+        function toggleChart(chartId) {
+            var chartContainer = document.getElementById(chartId);
+            var displayStyle = chartContainer.style.display === 'none' ? 'block' : 'none';
+            chartContainer.style.display = displayStyle;
+        }
+
+        const kpiUsers = 40;
+        const kpiOrders = 100;
+        const kpiRevenue = 30000000;
+
+        const actualUsers = @Model.TotalUsers;
+        const actualOrders = @Model.TotalOrders;
+        const actualRevenue = @Model.TotalRevenue;
+
+        const percentUsersT11 = (actualUsers / kpiUsers) * 100;
+        const percentOrdersT11 = (actualOrders / kpiOrders) * 100;
+        const percentRevenueT11 = (actualRevenue / kpiRevenue) * 100;
+
+        const percentUsersT10 = (35 / kpiUsers) * 100;
+        const percentOrdersT10 = (60 / kpiOrders) * 100;
+        const percentRevenueT10 = (25000000 / kpiRevenue) * 100;
+
+        const ctx = document.getElementById('adminChart').getContext('2d');
+        const adminChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7','Tháng 8', 'Tháng 9','Tháng 10','Tháng 11', 'Tháng 12'],
+                datasets: [{
+                    label: 'Tổng số người dùng',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, percentUsersT10, percentUsersT11,0],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                    {
+                        label: 'Tổng số đơn hàng',
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, percentOrdersT10,percentOrdersT11,0],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Tổng doanh thu',
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, percentRevenueT10,percentRevenueT11,0],
+                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Tổng số sản phẩm',
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 70,@Model.TotalProducts,0],
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 200,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            },
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        formatter: function(value, context) {
+                            return value;
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctxComparison = document.getElementById('comparisonChart').getContext('2d');
+        const comparisonChart = new Chart(ctxComparison, {
+            type: 'bar',
+            data:            {
+                labels: ['Tổng số người dùng', 'Tổng số đơn hàng', 'Tổng doanh thu'],
+                datasets: [{
+                    label: 'Tháng 10 KPI (%)',
+                    data: [percentUsersT10, percentOrdersT10, percentRevenueT10],
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                },
+                    {
+                        label: 'Tháng 11 KPI (%)',
+                        data: [percentUsersT11, percentOrdersT11, percentRevenueT11],
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+            },
+            options:
+            {
+                scales:
+                {
+                    y:
+                    {
+                        beginAtZero: true, max: 100,
+                        ticks: {
+                            callback: function (value)
+                            { return value + '%'; },
+                            stepSize: 10
+                        }
+                    }
+                },
+                plugins:
+                {
+                    datalabels:
+                    {
+                        anchor: 'end', align: 'end', formatter: function (value, context)
+                        { return value.toFixed(2) + '%'; }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

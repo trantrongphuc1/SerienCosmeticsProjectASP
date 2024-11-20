@@ -1,0 +1,137 @@
+﻿@model SerienCosmeticsProjectASP.Models.Cart
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+@{ var u = Session["use"] as SerienCosmeticsProjectASP.Models.Customer;}
+@{var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+
+@if (Model != null)
+{
+
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="@Url.Content("~/Content/source/img/banner3.jpeg")">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Giỏ hàng</h2>
+                        <div class="breadcrumb__option">
+                            <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                            <a href="@Url.Action("ShowCart","ShoppingCart")">Giỏ Hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Shoping Cart Section Begin -->
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="text-align:center">Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+
+                                    <tr>
+                                        <td class="shoping__cart__item_left">
+                                            <img src="~/Content/source/img/product/@item._product.ImagePro" height="100" width="100" alt="">
+                                        </td>
+                                        <td class="shoping__cart__item_right">
+                                            <h5>@item._product.NamePro</h5>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            @String.Format(format, "{0:c0}", item._product.Price)
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            <div>
+                                                @using (Html.BeginForm("UpdateCartQuantity", "ShoppingCart", FormMethod.Post))
+                                                {
+                                                    <input type="hidden" value="@item._product.ProductID" name="idPro" />
+                                                    <input type="number" style="margin-left: 20px; width: 60px; padding: 5px; font-size: 16px; text-align: center; border: 1px solid #ddd; border-radius: 5px; outline: none; " value="@item._quantity" name="cartQuantity" min="1" />
+                                                    <button type="submit" style="margin-left: 20px; background-color: #9e2b4f; color: white; border: none; padding: 8px 16px; font-size: 14px; font-weight: 600; border-radius: 5px; cursor: pointer; " onmouseover="this.style.backgroundColor='#94143c'" onmouseout="this.style.backgroundColor='#9e2b4f'">CẬP NHẬT</button>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td class="shoping__cart__item__close">
+                                            <a href="/ShoppingCart/RemoveCart/@item._product.ProductID"><span class="icon_close"></span></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__btns">
+                        <a href="@Url.Action("Index", "Product")" class="primary-btn cart-btn">TIẾP TỤC MUA HÀNG</a>
+
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Coupons</h5>
+                            <form action="#">
+                                <input type="text" placeholder="Nhập mã giảm giá của bạn...">
+                                <button type="submit" class="site-btn">NHẬP MÃ</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>Thông tin giỏ hàng</h5>
+                        <ul>
+                            <li>Thành tiền<span>@String.Format(format, "{0:c0}", Model.TotalMoney())</span></li>
+                            <li>Tổng cộng<span>@String.Format(format, "{0:c0}", Model.TotalMoney())</span></li>
+                        </ul>
+                        @{
+                            // Nếu khách hàng đã đăng nhập, chuyển tới trang thành công
+                            if (u != null)
+                            {
+                                using (Html.BeginForm("PlaceOrder", "ShoppingCart", FormMethod.Post))
+                                {
+                                    <button style=" margin: 0 auto; background-color: #9e2b4f; color: white; border: none; padding: 8px 16px; font-size: 14px; font-weight: 600; border-radius: 5px; cursor: pointer;" type="submit" class="primary-btn">ĐẶT HÀNG</button>
+                                }
+                                    
+                            }
+                            else
+                            {
+                                        // Nếu chưa đăng nhập, chuyển tới trang nhập thông tin
+                                        <a href = "@Url.Action("CustomerInfo", "ShoppingCart")" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+                            }
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Shoping Cart Section End -->
+
+}
+else
+{
+    @Html.Partial("EmptyCart");
+}

@@ -1,0 +1,65 @@
+﻿@using SerienCosmeticsProjectASP.Models;
+@model IEnumerable<SerienCosmeticsProjectASP.Models.Customer>
+@{
+    ViewBag.Title = "CustomerList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách tài khoản</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerPhoneNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerPassword)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPhoneNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPassword)
+            </td>
+            <td>
+                @*@Html.ActionLink("Chỉnh sửa", "EditCustomer", new { CusID = item.CustomerID, name = item.CustomerName, phonenum = item.CustomerPhoneNum, email = item.CustomerEmail, address = item.CustomerAddress })*@
+                @Html.ActionLink("Chi tiết", "DetailsCustomer", new { CusID = item.CustomerID, name = item.CustomerName, phonenum = item.CustomerPhoneNum, email = item.CustomerEmail, address = item.CustomerAddress })
+                @Html.ActionLink("Xóa", "DeleteCustomer", new { CusID = item.CustomerID, name = item.CustomerName, phonenum = item.CustomerPhoneNum, email = item.CustomerEmail, address = item.CustomerAddress })
+            </td>
+        </tr>
+    }
+
+</table>

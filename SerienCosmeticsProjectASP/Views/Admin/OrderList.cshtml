@@ -1,0 +1,61 @@
+﻿@using SerienCosmeticsProjectASP.Models;
+@model IEnumerable<SerienCosmeticsProjectASP.Models.OrderDetail>
+@{ var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");}
+
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách đơn hàng</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamePro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamePro)
+            </td>
+            <td>
+                @String.Format(format, "{0:c0}", item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @*@Html.ActionLink("Chỉnh sửa", "EditOrder", new { ordID = item.OrderDetailID })*@
+                @Html.ActionLink("Chi tiết", "DetailsOrder", new { ordID = item.OrderDetailID })
+                @Html.ActionLink("Xóa", "DeleteOrder", new { ordID = item.OrderDetailID })
+            </td>
+        </tr>
+    }
+
+</table>
+

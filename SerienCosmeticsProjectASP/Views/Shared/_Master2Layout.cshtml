@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Serien Template">
+    <meta name="keywords" content="Serien, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SERIEN Cosmetics | Official Website</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/Content/source/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/source/css/style.css" type="text/css">
+    
+</head>
+
+<body>
+    @{ var u = Session["use"] as SerienCosmeticsProjectASP.Models.Customer; }
+    <!-- Load Trang -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> Cskh@seriencosmetics.vn</li>
+                                <li>Free Shipping for all Order of $3.9</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+
+                            <div class="header__top__right__language">
+                                <img src="~/Content/source/img/language2.png" alt="">
+                                <div>English</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="@Url.Action("Index2","Home")">English</a></li>
+                                    <li><a href="@Url.Action("Index","Home")">Tiếng Việt</a></li>
+                                </ul>
+                            </div>
+                            @{ if (u != null)
+                                {
+                                    <div class="header__top__right__auth">
+                                        <a><i class="fa fa-user"></i>@u.CustomerName</a>
+                                    </div>
+                                    <div class="header__top__right__auth">
+                                        <a href="@Url.Action("Logout", "Access")"><i class="fa fa-user"></i> Log Out</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="header__top__right__auth">
+                                        <a href="@Url.Action("Login", "Access")"><i class="fa fa-user"></i> Sign In</a>
+                                    </div>
+                                    <div class="header__top__right__auth">
+                                        <a href="@Url.Action("Register", "Access")"><i class="fa fa-user"></i> Sign Up</a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="@Url.Action("Index","Home")"><img src="~/Content/source/img/logoserien.gif" alt="SERIEN Cosmetics"></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="@Url.Action("Index","Home")">HOME</a></li>
+
+                            <li><a href="@Url.Action("Index","Product")">SHOP</a></li>
+
+                            <li><a href="https://trustsales.vn/blog/mau-quang-cao-my-pham-hay-318">PAGES</a></li>
+
+                            <li><a href="@Url.Action("Contact","Home")">CONTACT</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+
+                            <li><a href="~/Views/ShoppingCart/Index.cshtml"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                        </ul>
+                        <div class="header__cart__price">Cart: <span>$150.00 </span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+    @RenderBody()
+
+    <!-- Footer Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="~/Views/Home/Index.cshtml"><img src="/img/footerlogo.png" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa chỉ: HUFLIT Hoc Mon Campus, Ho Chi Minh City, Vietnam.</li>
+                            <li>SDT: +84 55534125678</li>
+                            <li>Email: Cskh@seriencosmetics.vn</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>CHĂM SÓC KHÁCH HÀNG</h6>
+                        <ul>
+                            <li><a href="@Url.Action("About","Home")">About Us</a></li>
+
+                            <li><a href="#">Chính sách vận chuyển</a></li>
+                            <li><a href="#">Chính sách đổi trả</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Chính sách thanh toán</a></li>
+                        </ul>
+
+                        <ul>
+                            <li>Open time: </li>
+                            <li>From 9:00 - 21:30 all day in week (bao gồm cả các ngày lễ, ngày Tết).</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Trở thành người nhận tin sớm nhất</h6>
+                        <p>Nhận thông báo từ chúng tôi</p>
+                        <form action="#">
+                            <input type="text" placeholder="Nhập email của bạn...">
+                            <button type="submit" class="site-btn">Enter</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                        <br />
+                        <br />
+                        <img src="~/Content/source/img/congthuong.png" alt="logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text">
+                            <p>
+
+                                &copy;
+                                <script>document.write(new Date().getFullYear());</script> SERIEN Cosmetics. All rights reserved. </a>
+
+                            </p>
+                        </div>
+                        <div class="footer__copyright__payment"><img src="~/Content/source/img/payment-item1.png" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Js Plugins -->
+    <script src="~/Content/source/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/source/js/bootstrap.min.js"></script>
+    <script src="~/Content/source/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/source/js/jquery-ui.min.js"></script>
+    <script src="~/Content/source/js/jquery.slicknav.js"></script>
+    <script src="~/Content/source/js/mixitup.min.js"></script>
+    <script src="~/Content/source/js/owl.carousel.min.js"></script>
+    <script src="~/Content/source/js/main.js"></script>
+
+
+
+</body>
+
+</html>

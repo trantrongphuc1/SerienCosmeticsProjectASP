@@ -1,0 +1,108 @@
+﻿@model SerienCosmeticsProjectASP.Models.HomeModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+@{ var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");}
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="@Url.Content("~/Content/source/img/banner3.jpeg")">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>SERIEN COSMETICS</h2>
+                    <div class="breadcrumb__option">
+                        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                        <a href="@Url.Action("Index","Product")">Sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>Danh mục</h4>
+                        <ul>
+                            <li>
+                                <a>
+                                    @foreach (var item in Model.ListCategory)
+                                    {
+
+                                        @Html.ActionLink(item.NameCate, "ProductCate", "Category", new { @Id = item.IDCate }, null)
+
+                                    }
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sidebar__item">
+                        @* <h4>Khoảng giá</h4>
+
+        <div style="background:#ae7d7d" class="pricegia" data="(price:product<=500000)">
+            0 - 500.000đ
+        </div>
+        <div style="background: #ae7d7d" class="pricegia" data="((price:product>500000)&amp;&amp;(price:product<=1000000))">
+            500.000đ - 1.000.000đ
+        </div>
+        <div style="background: #ae7d7d" class="pricegia" data="(price:product>=1000000)">
+            Trên 1.000.000đ
+        </div>*@
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-7">
+
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            @*<div class="filter__sort">
+            <span>Sort By</span>
+            <select>
+                <option value="giathapnhat">Giá thấp nhất</option>
+                <option value="giacaonhat">Giá cao nhất</option>
+            </select>
+        </div>*@
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.ListProduct)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg">
+                                    <img src="~/Content/source/img/product/@item.ImagePro" />
+                                    <ul class="featured__item__pic__hover">
+
+                                        <li><a href="/ShoppingCart/AddToCart/@item.ProductID"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="@Url.Action("Detail","Product", new { Id = item.ProductID })">@item.NamePro</a></h6>
+                                    <h5>@String.Format(format, "{0:c0}", item.Price)</h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->

@@ -1,0 +1,88 @@
+﻿@model SerienCosmeticsProjectASP.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Thêm sản phẩm</h4>
+            <p class="card-description"> Sản phẩm </p>
+            <form class="forms-sample">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.NamePro, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+
+
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NamePro, "", new { @class = "text-danger" })
+
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.DescriptionPro, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.DescriptionPro, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionPro, "", new { @class = "text-danger" })
+
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+
+
+                    <div class="col-sm-9">
+
+                        @Html.DropDownListFor(model => model.IDCate, (IEnumerable<SelectListItem>)ViewBag.CategoryList, "Chọn danh mục", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IDCate, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+
+
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+
+                    </div>
+                </div>
+                <div class="form-group row">
+
+                    @Html.LabelFor(model => model.ImagePro, new { @class = "col-sm-3 col-form-label" })
+
+                    <div class="col-sm-9">
+                        <input type="file" name="UploadImage" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-gradient-primary me-2">Lưu</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+}
+
+<div>
+    @Html.ActionLink("Quay về", "Product")
+</div>
+
+
+

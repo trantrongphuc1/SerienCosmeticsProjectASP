@@ -1,0 +1,108 @@
+﻿@model SerienCosmeticsProjectASP.Models.Customer
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Đăng ký | SERIEN Cosmetics </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Content/source/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Content/source/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Content/AdminLayout/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/Content/AdminLayout/images/favicon.ico" />
+</head>
+<body>
+    @using (Html.BeginForm("Register", "Access", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-scroller">
+            <div class="container-fluid page-body-wrapper full-page-wrapper">
+                <div class="content-wrapper d-flex align-items-center auth">
+                    <div class="row flex-grow">
+                        <div class="col-lg-4 mx-auto">
+                            <div class="auth-form-light text-left p-5">
+                                <div class="brand-logo">
+                                    <img src="~/Content/source/img/footerlogo.png">
+                                </div>
+                                <h4>Bạn là người mới?</h4>
+                                <h6 class="font-weight-light">Đăng ký thành viên để nhận nhiều ưu đãi</h6>
+                                @if (ViewBag.Error != null)
+                                {
+                                    <div style="color: red;">
+                                        @ViewBag.Error
+                                    </div>
+                                }
+                                <form class="pt-3">
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control form-control-lg", placeholder = "Tên đăng nhập", type = "text", name = "FullName" })
+                                        <p>@Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CustomerEmail, new { @class = "form-control form-control-lg", placeholder = "Email", type = "email", name = "Email" })
+                                        <p>@Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CustomerPhoneNum, new { @class = "form-control form-control-lg", placeholder = "Số điện thoại", type = "number", name = "Phone" })
+                                        <p>@Html.ValidationMessageFor(model => model.CustomerPhoneNum, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CustomerPassword, new { @class = "form-control form-control-lg", placeholder = "Mật khẩu", type = "password" })
+                                        <p>@Html.ValidationMessageFor(model => model.CustomerPassword, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CustomerAddress, new { @class = "form-control form-control-lg", placeholder = "Địa chỉ", type = "text" })
+                                        <p>@Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })</p>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label text-muted">
+                                                <input type="checkbox" class="form-check-input"> Tôi đồng ý với tất cả các <a href="https://policies.google.com/terms">Điều khoản</a> & <a href="https://policies.google.com/privacy">Quyền riêng tư</a>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Đăng ký</button>
+
+                                    </div>
+                                    <div class="text-center mt-4 font-weight-light">
+                                        Đã có tài khoản? <a href="@Url.Action("Login", "Access")" class="text-primary">Đăng nhập</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+    }
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Content/AdminLayout/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Content/AdminLayout/js/off-canvas.js"></script>
+    <script src="~/Content/AdminLayout/js/hoverable-collapse.js"></script>
+    <script src="~/Content/AdminLayout/js/misc.js"></script>
+    <!-- endinject -->
+</body>
+</html>
+

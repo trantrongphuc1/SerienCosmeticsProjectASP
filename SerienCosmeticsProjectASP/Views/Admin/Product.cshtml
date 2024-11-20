@@ -1,0 +1,52 @@
+﻿@using SerienCosmeticsProjectASP.Models;
+@model IEnumerable<SerienCosmeticsProjectASP.Models.Product>
+@{ var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");}
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NamePro)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Category.NameCate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamePro)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.NameCate)
+            </td>
+            <td>
+                @String.Format(format, "{0:c0}", @item.Price)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { IDPro = item.ProductID })
+                @Html.ActionLink("Chi tiết", "Details", new { IDPro = item.ProductID }, null)
+                @Html.ActionLink("Xóa", "Delete", new { IDPro = item.ProductID })
+            </td>
+        </tr>
+    }
+
+</table>

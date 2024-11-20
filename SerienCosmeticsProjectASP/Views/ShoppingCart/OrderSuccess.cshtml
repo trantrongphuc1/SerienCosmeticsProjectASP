@@ -1,0 +1,38 @@
+﻿@model SerienCosmeticsProjectASP.Models.Order
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán hoàn tất</title>
+    <link rel="stylesheet" href="~/Content/source/css/paymentsuccess.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="checkmark">
+                <span>&#10004;</span>
+            </div>
+            <h2>Đặt hàng thành công</h2>
+            <p>Cảm ơn bạn đã mua hàng. Đơn hàng của bạn sẽ sớm dược giao.</p>
+            <hr>
+            <div class="details">
+                
+                <div>
+                    <span>Phương thức:</span>
+                    <span>Thanh toán khi nhận hàng (COD)</span>
+                </div>
+                <div>
+                    <span>Ngày đặt hàng:</span>
+                    <span>@DateTime.Now</span>
+                </div>
+            </div>
+            <a href="@Url.Action("Index","Home")"><button class="order-history-button">Trở về trang chủ</button></a>
+        </div>
+    </div>
+</body>
+</html>

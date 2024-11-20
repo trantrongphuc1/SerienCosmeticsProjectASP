@@ -1,0 +1,106 @@
+﻿@model SerienCosmeticsProjectASP.Models.Customer
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Chỉnh sửa tài khoản | SERIEN Cosmetics </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Content/source/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Content/source/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Content/AdminLayout/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/Content/AdminLayout/images/favicon.ico" />
+</head>
+<body>
+    @using (Html.BeginForm("EditProfile", "Access", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-scroller">
+            <div class="container-fluid page-body-wrapper full-page-wrapper">
+                <div class="content-wrapper d-flex align-items-center auth">
+                    <div class="row flex-grow">
+                        <div class="col-lg-4 mx-auto">
+                            <div class="auth-form-light text-left p-5">
+                                <div class="brand-logo">
+                                    <img src="~/Content/source/img/footerlogo.png">
+                                </div>
+                                <h4>Chỉnh sửa thông tin</h4>
+                                
+                                <form class="pt-3">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerName)
+                                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control form-control-lg" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerEmail)
+                                        @Html.TextBoxFor(m => m.CustomerEmail, new { @class = "form-control form-control-lg" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerPhoneNum)
+                                        @Html.TextBoxFor(m => m.CustomerPhoneNum, new { @class = "form-control form-control-lg" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerAddress)
+                                        @Html.TextBoxFor(m => m.CustomerAddress, new { @class = "form-control form-control-lg" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerPassword, "Mật khẩu mới")
+                                        @Html.PasswordFor(m => m.CustomerPassword, new { @class = "form-control form-control-lg", placeholder = "Nhập mật khẩu cũ nếu không đổi" })
+                                    </div>
+
+
+                                    <div class="mt-3">
+                                        
+
+                                    </div>
+                                    <div class="mt-5">
+                                        <div class="row d-flex justify-content-between">
+                                            <div class="col-5" style=" width: 49%;">
+                                                @Html.ActionLink("Quay lại", "AccountInfo", "Access", null, new { @class = "btn btn-gradient-primary btn-lg font-weight-medium auth-form-btn w-100" })
+                                            </div>
+                                            <div class="col-5" style=" width: 49%;">
+                                                <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Lưu</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+    }
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Content/AdminLayout/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Content/AdminLayout/js/off-canvas.js"></script>
+    <script src="~/Content/AdminLayout/js/hoverable-collapse.js"></script>
+    <script src="~/Content/AdminLayout/js/misc.js"></script>
+    <!-- endinject -->
+</body>
+</html>
+
+

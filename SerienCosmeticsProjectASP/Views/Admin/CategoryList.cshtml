@@ -1,0 +1,46 @@
+﻿@using SerienCosmeticsProjectASP.Models;
+@model IEnumerable<SerienCosmeticsProjectASP.Models.Category>
+
+@{
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách danh mục</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "CreateCategory")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDCate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameCate)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDCate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NameCate)
+            </td>
+            
+
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "EditCategory", new { IDCate = item.IDCate })
+                @Html.ActionLink("Chi tiết", "DetailsCategory", new { IDCate = item.IDCate })
+                @Html.ActionLink("Xóa", "DeleteCategory", new { IDCate = item.IDCate })
+            </td>
+        </tr>
+    }
+
+</table>

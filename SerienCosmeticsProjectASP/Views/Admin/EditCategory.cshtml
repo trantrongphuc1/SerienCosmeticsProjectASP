@@ -1,0 +1,55 @@
+﻿@model SerienCosmeticsProjectASP.Models.Category
+
+@{
+    ViewBag.Title = "EditCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("EditCategory", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Chỉnh sửa</h4>
+            <p class="card-description"> Danh mục </p>
+            <form class="forms-sample">
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.IDCate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.IDCate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.IDCate, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.NameCate, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.NameCate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NameCate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit"  class="btn btn-gradient-primary me-2" >Lưu</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay về", "CategoryList")
+</div>
+
+
+
+
