@@ -1,0 +1,1 @@
+Project này là web đầu tiên mà nhóm và tôi làm được. Khi ấy tôi chỉ mới học đầu năm 2. Tôi cũng không ngờ tiến độ nó nhanh đến thế. Nhưng chúng tôi vẫn hoàn thành được. Tuy nó không có gì đặc biệt và quá xịn sò nhưng tôi cảm thấy rất tâm đắc khi mà 1 đứa chưa có đủ kiến thức mà có thể làm được 1 trang web như thế này.
